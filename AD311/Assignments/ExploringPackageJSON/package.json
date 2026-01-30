@@ -1,0 +1,31 @@
+{
+  "name": "exploringpackages",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node scripts/index.js",
+    "test": "jest"
+  },
+  "keywords": [
+    "package",
+    "json",
+    "node"
+  ],
+  "author": "Bade Habib <Cristian.Habib@seattlecolleges.edu>",
+  "license": "MIT",
+  "description": "This is a project for learning about package.json",
+  "dependencies": {
+    "jquery": "^4.0.0"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0"
+  },
+  "engines": {
+    "node": ">=20.19.0 <20.20",
+    "npm": ">=10.8.0 <10.9"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JungDefiant/AppDev_Assignments"
+  }
+}
