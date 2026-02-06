@@ -9,4 +9,8 @@
 **Time:** O(n^2)
 **Space:** O(n)
 
+## Tests Passed
+![tests](tests.png)
+
+## Diagram
 ![diagram](diagram.png)
