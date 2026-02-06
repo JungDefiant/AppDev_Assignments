@@ -1,4 +1,4 @@
-# Week 3: TextWise Solutions
+# Week 4: Inventory Management System Update
 
 ## Clarifying Questions
 1. What is the maximum I can expect for inventory items in an array?
