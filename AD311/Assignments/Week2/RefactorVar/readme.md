@@ -1,2 +1,2 @@
 # Refactoring var to const and let
-X
+The main issue with the use of var is that variables are not block-scoped. This can lead to issues with variables being assigned properly and causing unexpected results. For example, the variable message is not block-scoped. If the programmer expands on this method and reassigns message inside of a block, then that may cause message to be reassigned when it is not desired. Another example is the use of i as an iterator nested inside of the for loop. If a nested loop uses i as an iterator, then it will update the iterator of the for loop in which it is nested.
