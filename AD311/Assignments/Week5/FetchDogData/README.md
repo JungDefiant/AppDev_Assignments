@@ -2,6 +2,7 @@
 This project is for experimenting with fetching data from dogapi.dog using JavaScript.
 
 To try out the project, run **npm start** in a console at the root folder.
+To check that all tests pass, run **npm test** in a console at the root folder.
 
 The functions will be output to the console.
 
