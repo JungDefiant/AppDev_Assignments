@@ -12,10 +12,13 @@ async function getDogData() {
     const result = await response.json();
     console.log("========= GET DOG DATA =========\n");
     console.log(result);
+
+    return result;
   }
   catch(err)
   {
     console.error(err);
+    throw err;
   };
 }
 
@@ -33,10 +36,13 @@ async function getDogDataById(id) {
     const result = await response.json();
     console.log("========= GET DOG DATA BY ID =========\n");
     console.log(result);
+
+    return result;
   }
   catch(err)
   {
     console.error(err);
+    throw err;
   };
 }
 
@@ -54,10 +60,13 @@ async function getDogFacts() {
     const result = await response.json();
     console.log("========= GET DOG FACTS =========\n");
     console.log(result);
+
+    return result;
   }
   catch(err)
   {
     console.error(err);
+    throw err;
   };
 }
 
@@ -75,10 +84,13 @@ async function getDogGroups() {
     const result = await response.json();
     console.log("========= GET DOG GROUPS =========\n");
     console.log(result);
+
+    return result;
   }
   catch(err)
   {
     console.error(err);
+    throw err;
   };
 }
 
@@ -86,3 +98,5 @@ getDogData();
 getDogDataById("5462fedb-7f80-49c5-98c3-8ce3207e7d03");
 getDogFacts();
 getDogGroups();
+
+module.exports = { getDogData, getDogDataById, getDogFacts, getDogGroups };
