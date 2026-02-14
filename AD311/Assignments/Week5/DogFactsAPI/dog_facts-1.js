@@ -436,4 +436,4 @@ const dogFacts = [
     `A dog’s heart beats up to 120 times per minute, or 50% faster than the average human heartbeat of 80 times per minute.`,
   ]
 
-  export default dogFacts;
+module.exports = { dogFacts };
