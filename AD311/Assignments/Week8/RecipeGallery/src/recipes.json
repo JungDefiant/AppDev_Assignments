@@ -1,0 +1,38 @@
+[
+  { 
+    "id": 1, 
+    "title": "Spaghetti Carbonara", 
+    "ingredients":  ["Pasta", "Eggs", "Cheese", "Bacon"], 
+    "image":  "https://www.budgetbytes.com/wp-content/uploads/2016/05/Spaghetti-Carbonara-Plated-500x500.jpg"
+  },
+  { 
+    "id": 2, 
+    "title": "Fried Pork Belly", 
+    "ingredients":  ["Pork Belly", "Seasoning", "Cornstarch"], 
+    "image":  "https://cicili.tv/wp-content/uploads/2021/08/Fried-Pork-Belly-1-scaled-1707x1707.jpeg"
+  },
+  { 
+    "id": 3, 
+    "title": "Dandan Noodles", 
+    "ingredients":  ["Noodles", "Minced Pork", "Sesame Sauce", "Greens"], 
+    "image":  "https://static01.nyt.com/images/2025/11/10/multimedia/10FD-KOREX-GK-dan-dan-noodles-vjpk/10FD-KOREX-GK-dan-dan-noodles-vjpk-mediumSquareAt3X.jpg"
+  },
+  { 
+    "id": 4, 
+    "title": "Chicken Enchilada", 
+    "ingredients":  ["Corn Flour", "Chicken", "Beans", "Red Chili Sauce"], 
+    "image":  "https://www.jessicagavin.com/wp-content/uploads/2018/04/chicken-enchiladas-5-1200.jpg"
+  },
+  { 
+    "id": 5, 
+    "title": "Tlayuda", 
+    "ingredients":  ["Oaxacan Tortilla", "Asiento", "Black Beans", "Quesillo", "Lettuce", "Avocado", "Tomatoes", "Tasajo Beef"], 
+    "image":  "https://upload.wikimedia.org/wikipedia/commons/e/ef/Tlayuda12-05oaxaca013x.jpg"
+  },
+  { 
+    "id": 6, 
+    "title": "Hawaiian Pizza", 
+    "ingredients":  ["Pizza Dough", "Tomato Sauce", "Mozzarella Cheese", "Ham", "Pineapple"], 
+    "image":  "https://dinnerthendessert.com/wp-content/uploads/2023/06/Hawaiian-Pizza-7.jpg"
+  }
+]
