@@ -34,5 +34,23 @@
     "title": "Hawaiian Pizza", 
     "ingredients":  ["Pizza Dough", "Tomato Sauce", "Mozzarella Cheese", "Ham", "Pineapple"], 
     "image":  "https://dinnerthendessert.com/wp-content/uploads/2023/06/Hawaiian-Pizza-7.jpg"
+  },
+  { 
+    "id": 7, 
+    "title": "Spaghetti Carbonara", 
+    "ingredients":  ["Pasta", "Eggs", "Cheese", "Bacon"], 
+    "image":  ""
+  },
+  { 
+    "id": 8, 
+    "title": "Spaghetti Carbonara", 
+    "ingredients":  [], 
+    "image":  "https://www.budgetbytes.com/wp-content/uploads/2016/05/Spaghetti-Carbonara-Plated-500x500.jpg"
+  },
+  { 
+    "id": 9, 
+    "title": "", 
+    "ingredients":  ["Pasta", "Eggs", "Cheese", "Bacon"], 
+    "image":  "https://www.budgetbytes.com/wp-content/uploads/2016/05/Spaghetti-Carbonara-Plated-500x500.jpg"
   }
 ]

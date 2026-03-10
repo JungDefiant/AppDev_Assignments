@@ -5,7 +5,6 @@ import './App.css'
 import FeatureToggle from './FeatureToggle'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
@@ -21,6 +20,9 @@ function App() {
         <FeatureToggle isEnabled={true} featureName={"SomeFeature1"} />
         <FeatureToggle isEnabled={false} featureName={"SomeFeature2"} />
         <FeatureToggle isEnabled={false} featureName={"SomeFeature3"} />
+        <FeatureToggle isEnabled={false} />
+        <FeatureToggle featureName={"SomeFeature4"} />
+        <FeatureToggle />
       </div>
     </>
   )
