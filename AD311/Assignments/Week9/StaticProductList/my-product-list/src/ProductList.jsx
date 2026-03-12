@@ -1,9 +1,8 @@
 import products from "./products.json";
-import { Card, CardContent, CardMedia, Grid, List, ListItem, Typography } from '@mui/material';
+import { Card, CardContent, Grid, Typography } from '@mui/material';
 
 export default function ProductList()
 {
-  console.log(products);
   return (
   <Grid container gap={4} justifyContent={"center"}>
     {products.map((val) => {

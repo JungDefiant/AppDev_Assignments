@@ -24,17 +24,17 @@
     "price": 65.00 
   },
   { 
-    "id": 4, 
+    "id": 5, 
     "description": "Portable devices perfect for listening on-the-go",
     "price": 65.00 
   },
   { 
-    "id": 4, 
+    "id": 6, 
     "name": "Wireless Earbuds", 
     "price": 65.00 
   },
   { 
-    "id": 4, 
+    "id": 7, 
     "name": "Wireless Earbuds", 
     "description": "Portable devices perfect for listening on-the-go"
   }
