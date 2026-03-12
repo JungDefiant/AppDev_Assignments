@@ -1,0 +1,41 @@
+[
+  { 
+    "id": 1, 
+    "name": "Laptop", 
+    "description": "High-performance laptop for professionals.", 
+    "price": 1200.00
+  },
+  { 
+    "id": 2, 
+    "name": "Pen", 
+    "description": "Precise and durable ballpoint pen.", 
+    "price": 2.00 
+  },
+  { 
+    "id": 3, 
+    "name": "Thumb Drive", 
+    "description": "Device used for physical transporting data.", 
+    "price": 20.00 
+  },
+  { 
+    "id": 4, 
+    "name": "Wireless Earbuds", 
+    "description": "Portable devices perfect for listening on-the-go",
+    "price": 65.00 
+  },
+  { 
+    "id": 4, 
+    "description": "Portable devices perfect for listening on-the-go",
+    "price": 65.00 
+  },
+  { 
+    "id": 4, 
+    "name": "Wireless Earbuds", 
+    "price": 65.00 
+  },
+  { 
+    "id": 4, 
+    "name": "Wireless Earbuds", 
+    "description": "Portable devices perfect for listening on-the-go"
+  }
+]

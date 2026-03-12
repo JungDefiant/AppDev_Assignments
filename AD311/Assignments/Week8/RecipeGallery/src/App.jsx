@@ -5,8 +5,6 @@ import './App.css'
 import RecipeGallery from './RecipeGallery'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <RecipeGallery />
