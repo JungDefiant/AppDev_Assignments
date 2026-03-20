@@ -1,10 +1,10 @@
 import "./App.css";
-import NestedButtons from "./NestedButtons";
+import Toolbar from "./Toolbar";
 
 function App() {
 	return (
 		<>
-			<NestedButtons />
+			<Toolbar />
 		</>
 	);
 }
