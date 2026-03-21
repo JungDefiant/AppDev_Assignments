@@ -5,6 +5,10 @@ export default function Toolbar() {
 		<>
 			<AlertButton message={"Upload"} children={"Upload"} />
 			<AlertButton message={"Play"} children={"Play"} />
+			<AlertButton message={"Pause"} children={"Pause"} />
+			<AlertButton message={"Pause"} />
+			<AlertButton children={"Pause"} />
+			<AlertButton />
 		</>
 	);
 }

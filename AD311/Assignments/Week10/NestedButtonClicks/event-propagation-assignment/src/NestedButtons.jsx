@@ -1,14 +1,23 @@
-export default function NestedButtons() {
-	const handleOuterClick = () => alert("Outer!");
+export default function NestedButtons({
+	outerMsg,
+	innerMsg,
+	outerWidth,
+	outerHeight,
+}) {
+	const handleOuterClick = () => alert(outerMsg ?? "No outer message");
 	const handleInnerClick = (e) => {
 		e.stopPropagation();
-		alert("Inner!");
+		alert(innerMsg ?? "No inner message");
 	};
 
 	return (
 		<div
 			onClick={handleOuterClick}
-			style={{ width: "200px", height: "200px", backgroundColor: "blue" }}
+			style={{
+				width: outerWidth,
+				height: outerHeight,
+				backgroundColor: "blue",
+			}}
 		>
 			<button onClick={handleInnerClick}>BUTTON</button>
 		</div>
