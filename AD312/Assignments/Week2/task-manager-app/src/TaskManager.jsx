@@ -5,6 +5,10 @@ export function TaskManager() {
 
 	const addTask = () => {
 		const title = prompt("Enter title");
+		if (title === null || title.trim() === "") {
+			return;
+		}
+
 		const newTask = {
 			id: crypto.randomUUID(),
 			title: title,
@@ -29,13 +33,13 @@ export function TaskManager() {
 		<div>
 			<div>
 				{tasks.map((val) => (
-					<div style={{ display: "flex", flexDirection: "row" }}>
+					<div key={val.id} style={{ display: "flex", flexDirection: "row" }}>
 						<div style={{ display: "flex", flexDirection: "row" }}>
 							<span>{val.title}</span>
 							<input
 								type="checkbox"
-								onClick={toggleTaskCompletion}
-								value={val.completed}
+								checked={val.completed}
+								onChange={() => toggleTaskCompletion(val.id)}
 							/>
 						</div>
 					</div>
