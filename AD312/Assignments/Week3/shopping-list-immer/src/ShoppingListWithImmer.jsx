@@ -3,10 +3,10 @@ import { useImmer } from "use-immer";
 
 const baseItem = {
 	id: 1,
-	name: "Something",
-	quantity: 2,
+	name: "N/A",
+	quantity: 0,
 	details: {
-		category: "product",
+		category: "N/A",
 		notes: "N/A",
 	},
 };
@@ -15,38 +15,30 @@ export default function ShoppingList({ itemArray }) {
 	const [shoppingList, setShoppingList] = useImmer(itemArray);
 
 	const setObjectProps = (props, baseProps) => {
-		console.log(baseProps);
+		const newProps = { ...props };
 		Object.entries(baseProps).forEach(([k, v]) => {
-			console.log(`${k}`, baseProps[k]);
-			console.log(props);
-
 			if (k === "id") {
 				return;
 			}
 
-			if (!props[k]) {
-				props[k] = baseProps[k];
-			}
-
 			if (typeof baseProps[k] === "number") {
 				const response = prompt(`Set new value for property: ${k}`);
-				props[k] = parseInt(response) || 0;
+				newProps[k] = parseInt(response) || 0;
 			} else if (typeof baseProps[k] === "object") {
-				console.log(baseProps[k]);
-				setObjectProps(props[k], baseProps[k]);
+				newProps[k] = setObjectProps(newProps[k] || {}, baseProps[k]);
 			} else {
 				const response = prompt(`Set new value for property: ${k}`);
-				props[k] = response;
+				newProps[k] = response || baseProps[k];
 			}
 		});
+
+		return newProps;
 	};
 
 	const addItem = () => {
-		const newItem = { id: shoppingList.length + 1 };
-		setObjectProps(newItem, baseItem);
+		const newItem = setObjectProps({ id: shoppingList.length + 1 }, baseItem);
 		setShoppingList((draft) => {
 			draft.push(newItem);
-			return draft;
 		});
 	};
 
@@ -57,23 +49,18 @@ export default function ShoppingList({ itemArray }) {
 			return;
 		}
 
-		const newProps = { id: id };
-		setObjectProps(newProps, baseItem);
+		const newProps = setObjectProps({ id: id }, baseItem);
 		setShoppingList((draft) => {
 			const item = draft.find((x) => x.id === newProps.id);
-			const ind = draft.findIndex((x) => x.id === newProps.id);
 			if (!item) {
 				return;
 			}
 
 			Object.entries(newProps).forEach(([k, v]) => {
-				console.log(`${k}: ${item[k]}, ${v}`);
 				if (newProps[k]) {
 					item[k] = v;
 				}
 			});
-			draft[ind] = item;
-			return draft;
 		});
 	};
 
