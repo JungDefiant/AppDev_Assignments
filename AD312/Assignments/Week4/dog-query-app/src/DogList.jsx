@@ -79,7 +79,7 @@ function DogBreedsList() {
 	}
 
 	if (result.isError) {
-		return <span>Error: {error.message}</span>;
+		return <span>Error: {result.error.message}</span>;
 	}
 
 	if (result.isSuccess) {
@@ -124,7 +124,7 @@ function DogBreedByIdDisplay({ id = "1" }) {
 	}
 
 	if (result.isError) {
-		return <span>Error: {error.message}</span>;
+		return <span>Error: {result.error.message}</span>;
 	}
 
 	if (result.isSuccess) {
@@ -168,7 +168,7 @@ function DogFactsList() {
 	}
 
 	if (result.isError) {
-		return <span>Error: {error.message}</span>;
+		return <span>Error: {result.error.message}</span>;
 	}
 
 	if (result.isSuccess) {
@@ -210,7 +210,7 @@ function DogGroupsList() {
 	}
 
 	if (result.isError) {
-		return <span>Error: {error.message}</span>;
+		return <span>Error: {result.error.message}</span>;
 	}
 
 	if (result.isSuccess) {
