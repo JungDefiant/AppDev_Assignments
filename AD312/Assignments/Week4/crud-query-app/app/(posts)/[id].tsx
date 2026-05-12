@@ -85,6 +85,8 @@ export default function EditPost() {
 
 	return (
 		<View style={styles.container}>
+			<Text style={styles.titleText}>Edit Post</Text>
+
 			<View style={styles.inputRow}>
 				<Text style={styles.inputLabel}>Title</Text>
 				<Controller

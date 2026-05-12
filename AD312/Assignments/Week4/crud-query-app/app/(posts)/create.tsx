@@ -28,6 +28,8 @@ export default function CreatePost() {
 
 	return (
 		<View style={styles.container}>
+			<Text style={styles.titleText}>Create Post</Text>
+
 			<View style={styles.inputRow}>
 				<Text style={styles.inputLabel}>Title</Text>
 				<Controller
@@ -49,7 +51,7 @@ export default function CreatePost() {
 			</View>
 
 			<Button title="Submit" onPress={handleSubmit(onSubmit)} />
-			{isSuccess && <Text style={styles.inputLabel}>Updated!</Text>}
+			{isSuccess && <Text style={styles.inputLabel}>New post created!</Text>}
 		</View>
 	);
 }
