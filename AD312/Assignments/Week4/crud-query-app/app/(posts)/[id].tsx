@@ -69,7 +69,11 @@ export default function EditPost() {
 	}
 
 	if (result.isError) {
-		return <span>Error: {result.error.message}</span>;
+		return (
+			<View>
+				<Text>Error: {result.error.message}</Text>
+			</View>
+		);
 	}
 
 	if (result.isSuccess) {

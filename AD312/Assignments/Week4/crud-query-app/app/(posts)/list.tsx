@@ -57,11 +57,19 @@ export default function CardList() {
 	});
 
 	if (result.isPending) {
-		return <span>Loading...</span>;
+		return (
+			<View>
+				<Text>Loading...</Text>
+			</View>
+		);
 	}
 
 	if (result.isError) {
-		return <span>Error: {result.error.message}</span>;
+		return (
+			<View>
+				<Text>Error: {result.error.message}</Text>
+			</View>
+		);
 	}
 
 	if (result.isSuccess) {
@@ -96,7 +104,7 @@ export default function CardList() {
 				{data
 					.filter((x: any) => filterUserId === -1 || x.userId === filterUserId)
 					.map((val: any) => (
-						<View style={styles.dataCard}>
+						<View key={val.id} style={styles.dataCard}>
 							<Text style={styles.titleText}>{val.title}</Text>
 							<Text>{val.body}</Text>
 							<View style={styles.buttonRow}>
