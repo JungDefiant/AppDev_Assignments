@@ -13,8 +13,6 @@ export default function RecipeGallery({ loaderData }: Route.ComponentProps) {
 	const { galleryEntries } = loaderData;
 
 	const idNum = Number.parseInt(entryid as string);
-	console.log(entryid);
-	console.log(idNum);
 
 	const entry: GalleryEntry | undefined = galleryEntries.find(
 		(x: GalleryEntry) => x.id === idNum,

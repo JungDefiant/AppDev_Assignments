@@ -45,7 +45,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
 	return (
 		<>
-			<h1>Blog</h1>
+			<h1 style={{ fontSize: 24, fontWeight: 600 }}>Blog</h1>
 			<nav style={{ marginBottom: 20, display: "flex", gap: 8 }}>
 				<Link to="/">Home</Link>
 				<Link to="/about">About</Link>

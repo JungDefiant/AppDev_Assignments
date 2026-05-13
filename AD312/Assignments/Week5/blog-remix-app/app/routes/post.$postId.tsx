@@ -12,8 +12,6 @@ export default function PostView({ loaderData }: Route.ComponentProps) {
 	const { posts } = loaderData;
 
 	const idNum = Number.parseInt(postid as string);
-	console.log(postid);
-	console.log(idNum);
 
 	const post: Post | undefined = posts.find((x: Post) => x.id === idNum);
 	if (!post) {
