@@ -1,122 +1,165 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useCallback, useEffect } from "react";
+import { useForm, useWatch } from "react-hook-form";
+import type { SubmitHandler } from "react-hook-form";
 
-function App() {
-  const [count, setCount] = useState(0)
+type Inputs = {
+	fullName: string;
+	emailAddress: string;
+	password: string;
+	confirmPassword: string;
+	accountRole: string;
+	termsConditions: boolean;
+};
 
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+export default function App() {
+	const accountRoles = ["Developer", "Designer", "Product Manager"];
+	const defaultValues = {
+		fullName: "",
+		emailAddress: "",
+		password: "",
+		confirmPassword: "",
+		accountRole: "",
+		termsConditions: false,
+	};
 
-      <div className="ticks"></div>
+	const {
+		control,
+		register,
+		handleSubmit,
+		setFocus,
+		reset,
+		getValues,
+		formState: { isSubmitted, errors },
+	} = useForm<Inputs>({
+		defaultValues,
+	});
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+	const onSubmit: SubmitHandler<Inputs> = () => {
+		setTimeout(() => {
+			reset(defaultValues);
+		}, 2000);
+	};
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+	const resetAsyncForm = useCallback(async () => {
+		reset(defaultValues);
+	}, [reset]);
+
+	useEffect(() => {
+		resetAsyncForm();
+	}, [resetAsyncForm]);
+
+	useWatch({
+		control,
+		compute: (data: Inputs) => {
+			localStorage.setItem("fullName", data.fullName);
+			localStorage.setItem("emailAddress", data.emailAddress);
+			localStorage.setItem("password", data.password);
+			localStorage.setItem("accountRole", data.accountRole);
+			localStorage.setItem("termsConditions", data.termsConditions.toString());
+		},
+	});
+
+	useEffect(() => {
+		setFocus("fullName");
+	}, []);
+
+	return (
+		<form
+			style={{
+				display: "flex",
+				flexDirection: "column",
+				alignContent: "center",
+				gap: 16,
+			}}
+			onSubmit={handleSubmit(onSubmit)}
+		>
+			<div style={{ display: "flex", flexDirection: "column" }}>
+				<label>Full Name</label>
+				<input {...register("fullName", { required: true, min: 3 })} />
+				{errors.fullName && <p>This field is required</p>}
+			</div>
+
+			<div style={{ display: "flex", flexDirection: "column" }}>
+				<label>Email Address</label>
+				<input
+					{...register("emailAddress", {
+						required: true,
+						pattern: /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/,
+					})}
+				/>
+				{errors.emailAddress && <p>Enter a proper email address</p>}
+			</div>
+
+			<div style={{ display: "flex", flexDirection: "column" }}>
+				<label>Password</label>
+				<input
+					{...register("password", {
+						required: true,
+						min: 8,
+						validate: {
+							lowerCase: (pwd) => pwd.match(/[a-z]/) !== null,
+							upperCase: (pwd) => pwd.match(/[A-Z]/) !== null,
+							number: (pwd) => pwd.match(/\d/) !== null,
+						},
+					})}
+				/>
+				{errors.password && (
+					<p>
+						Invalid password. Requires 8 minimum characters, 1 uppercase
+						character, 1 lowercase character, and 1 number.
+					</p>
+				)}
+
+				<label>Confirm Password</label>
+				<input
+					{...register("confirmPassword", {
+						required: true,
+						validate: {
+							pwdMatch: (pwd) => pwd === getValues("password"),
+						},
+					})}
+				/>
+				{errors.confirmPassword && <p>Passwords do not match!</p>}
+			</div>
+
+			<div style={{ display: "flex", flexDirection: "column" }}>
+				<label>Account Role</label>
+				<select
+					{...register("accountRole", {
+						required: true,
+						validate: {
+							emptyValue: (v) => v !== "",
+						},
+					})}
+				>
+					<option value={""} disabled>
+						Select an Account Role
+					</option>
+					{accountRoles.map((role) => {
+						return (
+							<option key={role.trim().toLowerCase()} value={role}>
+								{role}
+							</option>
+						);
+					})}
+				</select>
+				{errors.accountRole && <p>This field is required</p>}
+			</div>
+
+			<div>
+				<label>Terms & Conditions </label>
+				<input
+					type="checkbox"
+					{...register("termsConditions", { required: true })}
+				/>
+				{errors.termsConditions && <p>This field is required</p>}
+			</div>
+
+			{isSubmitted && !errors ? (
+				<span>Registering...</span>
+			) : (
+				<input type="submit" />
+			)}
+		</form>
+	);
 }
-
-export default App
