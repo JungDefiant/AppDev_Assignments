@@ -24,7 +24,6 @@ export default function UserProfile() {
 		handleSubmit,
 		setError,
 		reset,
-		formState,
 		formState: { errors, isDirty },
 	} = useForm<Inputs>();
 
@@ -47,7 +46,7 @@ export default function UserProfile() {
 		onSuccess: async (data) => {
 			const inputs = await data.json();
 			queryClient.invalidateQueries({ queryKey: ["userProfile"] });
-			reset(inputs as Inputs, { keepDirty: false, keepDirtyValues: false });
+			reset(inputs as Inputs);
 		},
 	});
 
