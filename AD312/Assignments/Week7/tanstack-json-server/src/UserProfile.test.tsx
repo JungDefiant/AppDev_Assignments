@@ -1,28 +1,23 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import {
-	useQuery,
-	QueryClient,
-	QueryClientProvider,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { describe, it, expect, beforeEach, vi, afterEach } from "vitest";
 import UserProfile from "./UserProfile";
 
+// Ensure we don't replace `useQuery` with an empty mock - use the real implementation
 vi.mock("@tanstack/react-query", async () => {
 	const actual = await vi.importActual("@tanstack/react-query");
-	const mockUseQuery = vi.fn();
 	return {
 		...actual,
-		useQuery: mockUseQuery,
+		useQuery: actual.useQuery,
 	};
 });
 
 const createWrapper = () => {
 	const queryClient = new QueryClient({
 		defaultOptions: {
-			queries: {
-				retry: false,
-			},
+			queries: { retry: false },
+			mutations: { retry: false },
 		},
 	});
 	return ({ children }: { children: React.ReactNode }) => (
@@ -31,16 +26,7 @@ const createWrapper = () => {
 };
 
 describe("UserProfile Component", () => {
-	let queryClient: QueryClient;
-
 	beforeEach(() => {
-		queryClient = new QueryClient({
-			defaultOptions: {
-				queries: {
-					retry: false,
-				},
-			},
-		});
 		vi.clearAllMocks();
 	});
 
@@ -73,14 +59,13 @@ describe("UserProfile Component", () => {
 				),
 			);
 
-			render(<UserProfile queryClient={queryClient} />, {
+			render(<UserProfile />, {
 				wrapper: createWrapper(),
 			});
 
 			// Should show loading state first
 			expect(screen.getByText("Loading...")).toBeInTheDocument();
 
-			console.log(screen.getByText("Loading..."));
 			// Wait for the data to load
 			await waitFor(() => {
 				expect(screen.queryByText("Loading...")).not.toBeInTheDocument();
@@ -106,7 +91,7 @@ describe("UserProfile Component", () => {
 				),
 			);
 
-			render(<UserProfile queryClient={queryClient} />, {
+			render(<UserProfile />, {
 				wrapper: createWrapper(),
 			});
 
@@ -155,7 +140,7 @@ describe("UserProfile Component", () => {
 
 			vi.stubGlobal("fetch", mockFetch);
 
-			render(<UserProfile queryClient={queryClient} />, {
+			render(<UserProfile />, {
 				wrapper: createWrapper(),
 			});
 
@@ -178,9 +163,9 @@ describe("UserProfile Component", () => {
 			const submitButton = screen.getByRole("button", { name: /submit/i });
 			fireEvent.click(submitButton);
 
-			// Verify mutation was called
+			// Verify mutation was called (initial GET + PUT + refetch after invalidate)
 			await waitFor(() => {
-				expect(mockFetch).toHaveBeenCalledTimes(2);
+				expect(mockFetch).toHaveBeenCalledTimes(3);
 			});
 		});
 	});
@@ -196,7 +181,7 @@ describe("UserProfile Component", () => {
 				),
 			);
 
-			render(<UserProfile queryClient={queryClient} />, {
+			render(<UserProfile />, {
 				wrapper: createWrapper(),
 			});
 
@@ -230,7 +215,7 @@ describe("UserProfile Component", () => {
 
 			vi.stubGlobal("fetch", mockFetch);
 
-			render(<UserProfile queryClient={queryClient} />, {
+			render(<UserProfile />, {
 				wrapper: createWrapper(),
 			});
 
@@ -274,7 +259,7 @@ describe("UserProfile Component", () => {
 				),
 			);
 
-			render(<UserProfile queryClient={queryClient} />, {
+			render(<UserProfile />, {
 				wrapper: createWrapper(),
 			});
 
@@ -289,7 +274,7 @@ describe("UserProfile Component", () => {
 			});
 
 			// Verify button is disabled when form is not dirty
-			expect(submitButton.getAttribute("disabled")).toBe("true");
+			expect(submitButton).toBeDisabled();
 
 			// Modify form field
 			const usernameInput = screen.getByDisplayValue("test_user");
@@ -298,7 +283,7 @@ describe("UserProfile Component", () => {
 
 			// Verify button is enabled when form is dirty
 			await waitFor(() => {
-				expect(submitButton.getAttribute("disabled")).toBe("false");
+				expect(submitButton).toBeEnabled();
 			});
 		});
 	});
