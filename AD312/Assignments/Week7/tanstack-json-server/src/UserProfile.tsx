@@ -67,7 +67,7 @@ export default function UserProfile(props: UserProfileProps) {
 		if (result.isSuccess && result.data) {
 			reset(result.data);
 		}
-	}, [result.isSuccess, result.data]);
+	}, [result?.isSuccess, result?.data]);
 
 	if (result.isPending) {
 		return <span>Loading...</span>;

@@ -42,13 +42,6 @@ describe("UserProfile Component", () => {
 			},
 		});
 		vi.clearAllMocks();
-		(useQuery as any).mockImplementation(() => ({
-			data: null,
-			isPending: true,
-			isError: false,
-			error: null,
-			isSuccess: false,
-		}));
 	});
 
 	afterEach(() => {
@@ -87,6 +80,7 @@ describe("UserProfile Component", () => {
 			// Should show loading state first
 			expect(screen.getByText("Loading...")).toBeInTheDocument();
 
+			console.log(screen.getByText("Loading..."));
 			// Wait for the data to load
 			await waitFor(() => {
 				expect(screen.queryByText("Loading...")).not.toBeInTheDocument();
