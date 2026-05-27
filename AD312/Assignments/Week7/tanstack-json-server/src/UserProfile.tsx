@@ -1,9 +1,4 @@
-import {
-	QueryClient,
-	QueryClientProvider,
-	useMutation,
-	useQuery,
-} from "@tanstack/react-query";
+import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import type { SubmitHandler } from "react-hook-form";
@@ -15,9 +10,11 @@ type Inputs = {
 	notifications: string;
 };
 
-const queryClient = new QueryClient();
+type UserProfileProps = {
+	queryClient: QueryClient;
+};
 
-export default function UserProfile() {
+export default function UserProfile(props: UserProfileProps) {
 	const JSON_SERVER_URL = "http://localhost:3000";
 	const {
 		register,
@@ -45,7 +42,7 @@ export default function UserProfile() {
 		},
 		onSuccess: async (data) => {
 			const inputs = await data.json();
-			queryClient.invalidateQueries({ queryKey: ["userProfile"] });
+			props.queryClient.invalidateQueries({ queryKey: ["userProfile"] });
 			reset(inputs as Inputs);
 		},
 	});
@@ -85,34 +82,32 @@ export default function UserProfile() {
 	};
 
 	return (
-		<QueryClientProvider client={queryClient}>
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<div>
-					<label>Username</label>
-					<input {...register("username")} />
-					{errors.username && <span>This field is required</span>}
-				</div>
+		<form onSubmit={handleSubmit(onSubmit)}>
+			<div>
+				<label>Username</label>
+				<input {...register("username")} />
+				{errors.username && <span>This field is required</span>}
+			</div>
 
-				<div>
-					<label>Email Address</label>
-					<input {...register("email", { required: true })} />
-					{errors.email && <span>This field is required</span>}
-				</div>
+			<div>
+				<label>Email Address</label>
+				<input {...register("email", { required: true })} />
+				{errors.email && <span>This field is required</span>}
+			</div>
 
-				<div>
-					<label>Biography</label>
-					<input {...register("bio")} />
-					{errors.bio && <span>This field is required</span>}
-				</div>
+			<div>
+				<label>Biography</label>
+				<input {...register("bio")} />
+				{errors.bio && <span>This field is required</span>}
+			</div>
 
-				<div>
-					<label>Notifications</label>
-					<input {...register("notifications")} />
-					{errors.notifications && <span>This field is required</span>}
-				</div>
+			<div>
+				<label>Notifications</label>
+				<input {...register("notifications")} />
+				{errors.notifications && <span>This field is required</span>}
+			</div>
 
-				<input type="submit" disabled={!isDirty || updateMutation.isPending} />
-			</form>
-		</QueryClientProvider>
+			<input type="submit" disabled={!isDirty || updateMutation.isPending} />
+		</form>
 	);
 }

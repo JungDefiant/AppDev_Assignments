@@ -6,7 +6,7 @@ export default function App() {
 
 	return (
 		<QueryClientProvider client={queryClient}>
-			<UserProfile />
+			<UserProfile queryClient={queryClient} />
 		</QueryClientProvider>
 	);
 }
