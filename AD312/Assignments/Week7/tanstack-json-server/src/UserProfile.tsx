@@ -4,7 +4,7 @@ import {
 	useMutation,
 	useQuery,
 } from "@tanstack/react-query";
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import type { SubmitHandler } from "react-hook-form";
 
@@ -22,17 +22,11 @@ export default function UserProfile() {
 	const {
 		register,
 		handleSubmit,
-		setValues,
 		setError,
 		reset,
+		formState,
 		formState: { errors, isDirty },
 	} = useForm<Inputs>();
-
-	const resetAsyncForm = useCallback(async () => {}, [reset]);
-
-	useEffect(() => {
-		resetAsyncForm();
-	}, [resetAsyncForm]);
 
 	const updateMutation = useMutation({
 		mutationFn: async (editProfileData: Inputs) => {
@@ -51,12 +45,9 @@ export default function UserProfile() {
 			setError("email", { message: err.message });
 		},
 		onSuccess: async (data) => {
-			const updatedData = (await data.json()) as Inputs;
-			if (updatedData) {
-				console.log(updatedData);
-				queryClient.invalidateQueries({ queryKey: ["userProfile"] });
-				reset(updatedData);
-			}
+			const inputs = await data.json();
+			queryClient.invalidateQueries({ queryKey: ["userProfile"] });
+			reset(inputs as Inputs, { keepDirty: false, keepDirtyValues: false });
 		},
 	});
 
@@ -76,6 +67,12 @@ export default function UserProfile() {
 		queryFn: fetchData,
 	});
 
+	useEffect(() => {
+		if (result.isSuccess && result.data) {
+			reset(result.data);
+		}
+	}, [result.isSuccess, result.data]);
+
 	if (result.isPending) {
 		return <span>Loading...</span>;
 	}
@@ -84,12 +81,8 @@ export default function UserProfile() {
 		return <span>Error getting User Profile data!</span>;
 	}
 
-	if (result.isSuccess) {
-		setValues(result.data);
-	}
-
 	const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
-		updateMutation.mutate(data);
+		await updateMutation.mutate(data);
 	};
 
 	return (
