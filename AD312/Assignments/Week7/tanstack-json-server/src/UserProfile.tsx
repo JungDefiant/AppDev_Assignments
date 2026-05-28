@@ -68,8 +68,8 @@ export default function UserProfile() {
 		onError: (err) => {
 			setError("email", { message: err.message });
 		},
-		onSuccess: (data) => {
-			queryClient.invalidateQueries({ queryKey: ["userProfile"] });
+		onSuccess: async (data) => {
+			await queryClient.invalidateQueries({ queryKey: ["userProfile"] });
 			reset(data);
 		},
 	});
