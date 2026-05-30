@@ -1,0 +1,10 @@
+{
+	"compilerOptions": {
+		"module": "ES2022",
+		"target": "ES2022",
+		"jsx": "react-jsx",
+		"resolveJsonModule": true,
+		"strict": true
+	},
+	"exclude": ["node_modules"]
+}
