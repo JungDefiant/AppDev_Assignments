@@ -7,6 +7,7 @@ export default function DynamicPoll(props) {
 	const chartInstanceRef = useRef();
 	const canvasRef = useRef();
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: Causes errors with chart not instantiating during mount
 	useEffect(() => {
 		if (!chartInstanceRef.current && canvasRef.current) {
 			chartInstanceRef.current = new Chart(canvasRef.current, {
@@ -62,7 +63,11 @@ export default function DynamicPoll(props) {
 			<div style={{ display: "flex", flexDirection: "row", gap: 4 }}>
 				{labels.current.map((label) => {
 					return (
-						<button key={`btn_${label.toLowerCase()}`} onClick={onOptionClick}>
+						<button
+							type="button"
+							key={`btn_${label.toLowerCase()}`}
+							onClick={onOptionClick}
+						>
 							{label}
 						</button>
 					);

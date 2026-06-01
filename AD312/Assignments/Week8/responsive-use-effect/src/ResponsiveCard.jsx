@@ -1,42 +1,38 @@
 import { Card, CardContent, CardHeader, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
-export default function ResponsiveCard(props) {
-	const mobileBreakpoint = { width: 768, height: 1364 };
-	const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+export default function ResponsiveCard() {
+	const mobileBreakpoint = { width: 768, height: 1024 };
+	const [windowSize, setWindowSize] = useState({
+		width: window ? window.innerWidth : 0,
+		height: window ? window.innerHeight : 0,
+	});
 
-	useEffect(
-		() => {
-			const resizeCard = (ev) => {
-				setWindowSize({ width: window.innerWidth, height: window.innerHeight });
-			};
+	useEffect(() => {
+		const resizeCard = () => {
+			setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+		};
 
-			window.addEventListener("resize", resizeCard);
+		resizeCard();
 
-			return () => {
-				window.removeEventListener("resize", resizeCard);
-			};
-		},
-		/* 
-    I chose this dependency array configuration (an empty array) because I wanted 
-    the useEffect to only trigger when the component is mounted. If the dependency 
-    array was not specified, then the useEffect would trigger on re-render, which 
-    is not needed to subscribe an event.
-    */
-		[],
-	);
+		window.addEventListener("resize", resizeCard);
+
+		return () => {
+			window.removeEventListener("resize", resizeCard);
+		};
+	}, []);
+
+	const isMobile = windowSize.width <= mobileBreakpoint.width;
 
 	return (
 		<Card
 			style={{
-				width: windowSize.width <= mobileBreakpoint.width ? 120 : 800,
-				height: windowSize.height <= mobileBreakpoint.height ? 120 : 800,
-				fontSize: windowSize.width <= mobileBreakpoint.width ? 2 : 16,
+				width: isMobile ? "120px" : "800px",
+				height: isMobile ? "120px" : "800px",
+				fontSize: isMobile ? "2px" : "16px",
 			}}
 		>
-			<CardHeader>
-				<Typography>Card Header</Typography>
-			</CardHeader>
+			<CardHeader title="Card Header" />
 			<CardContent>
 				<Typography>
 					Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque
