@@ -1,4 +1,4 @@
-function InsertionSort(arr) {
+function insertionSort(arr) {
 	for (let i = 0; i < arr.length; i++) {
 		const nextElToSort = arr[i];
 
@@ -13,7 +13,35 @@ function InsertionSort(arr) {
 				break;
 			}
 		}
+
+		console.log(`STEP ${i + 1}`, arr);
 	}
 }
 
-module.exports = InsertionSort;
+function insertionSortObjects(arr) {
+	for (let i = 0; i < arr.length; i++) {
+		const nextElToSort = arr[i];
+
+		for (let j = i + 1; j > 0; j--) {
+			const nextElToCheck = arr[j];
+			console.log(nextElToCheck);
+
+			if (!nextElToCheck) {
+				continue;
+			}
+
+			if (nextElToCheck.id < arr[j - 1].id) {
+				const swap = arr[j - 1];
+				arr[j - 1] = nextElToCheck;
+				arr[j] = swap;
+			} else {
+				break;
+			}
+		}
+	}
+}
+
+module.exports = {
+	insertionSort,
+	insertionSortObjects,
+};
