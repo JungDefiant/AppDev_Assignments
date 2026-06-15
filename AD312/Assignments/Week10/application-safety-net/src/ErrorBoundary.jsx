@@ -1,6 +1,5 @@
 import {
 	Component,
-	captureOwnerStack,
 	logErrorToMyService,
 	getDerivedStateFromError,
 } from "react";
