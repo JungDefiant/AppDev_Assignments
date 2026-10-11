@@ -1,14 +1,5 @@
 import { test, expect } from "@jest/globals";
-import {
-	isEven,
-	add,
-	divide,
-	palindrome,
-	countVowels,
-	findMax,
-	removeDuplicates,
-} from "../src/functions";
-import { count } from "node:console";
+import { isEven, palindrome, countVowels } from "../src/functions";
 
 test("isEven", () => {
 	expect(isEven(2)).toEqual(true);
