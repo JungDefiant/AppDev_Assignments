@@ -1,0 +1,20 @@
+{
+  "name": "ai-prototype-discourse-slack-notifier",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Companion service that forwards Discourse webhook notifications to Slack.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.6.0"
+  },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env src/index.ts",
+    "send-test": "node --env-file-if-exists=.env src/send-test.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test \"src/**/*.test.ts\""
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^5.6.0"
+  }
+}
