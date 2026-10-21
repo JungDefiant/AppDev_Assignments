@@ -85,8 +85,8 @@ authRouter.post('/register', async (req, res) => {
 });
 
 interface LoginBody {
-  username?: unknown;
-  password?: unknown;
+  username?: string;
+  password?: string;
 }
 
 // POST /api/auth/login — public. Returns a signed JWT on success.

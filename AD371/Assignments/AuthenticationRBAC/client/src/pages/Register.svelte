@@ -67,7 +67,7 @@
   {#if role === 'admin'}
     <label>
       Admin signup code
-      <input type="password" bind:value={adminSignupCode} placeholder="AD371-ADMIN-DEMO-CODE" />
+      <input type="password" bind:value={adminSignupCode} />
     </label>
     <p class="muted" style="font-size: 0.85rem;">
       The server only accepts Admin self-registration with the
