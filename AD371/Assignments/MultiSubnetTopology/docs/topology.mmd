@@ -1,0 +1,61 @@
+flowchart TB
+%% =============================================================================
+%% AD371 MultiSubnetTopology - Network Topology (Mermaid)
+%%
+%% Render with: https://mermaid.live  ·  VS Code Mermaid extension  ·
+%% GitHub/GitLab markdown (fenced ```mermaid block, see README.md)
+%% =============================================================================
+    %% --------------------------------------------------------------------
+    %% Clients reach the topology only via the host's published ports.
+    %% --------------------------------------------------------------------
+    CLIENT(["🌐 Host machine / Internet<br/>(curl · browser)"])
+
+    %% --------------------------------------------------------------------
+    %% PUBLIC SUBNET - bridge network, port publishing allowed.
+    %% --------------------------------------------------------------------
+    subgraph PUBLIC_SUBNET["🌐 public_subnet · 172.28.0.0/24 · bridge (non-internal)"]
+        PORTS{{"Docker published ports<br/>0.0.0.0:8080 → :80<br/>0.0.0.0:8443 → :443 (TLS)"}}
+        LB["🧭 nginx LOAD BALANCER<br/>reverse proxy · dual-homed<br/>Round-Robin upstream pool"]
+    end
+
+    %% --------------------------------------------------------------------
+    %% PRIVATE SUBNET - internal=true, air-gapped, no host ports possible.
+    %% --------------------------------------------------------------------
+    subgraph PRIVATE_SUBNET["🔒 private_subnet · 172.28.1.0/24 · internal = true (air-gapped)"]
+        B1["backend-1<br/>Node.js · :3000<br/>SERVER_ID + /healthz"]
+        B2["backend-2<br/>Node.js · :3000<br/>SERVER_ID + /healthz"]
+        P1["pybackend-1<br/>Python · :3000<br/>SERVER_ID + /healthz"]
+        P2["pybackend-2<br/>Python · :3000<br/>SERVER_ID + /healthz"]
+    end
+
+    %% --------------------------------------------------------------------
+    %% Traffic flow: client -> published ports -> LB -> round-robin pool.
+    %% --------------------------------------------------------------------
+    CLIENT ==>|"HTTP :8080 / HTTPS :8443"| PORTS
+    PORTS --> LB
+
+    LB ==>|"round-robin proxy_pass :3000"| B1
+    LB ==> B2
+    LB ==> P1
+    LB ==> P2
+
+    %% The LB is dual-homed: it is also attached to the private subnet.
+    LB -.-|"dual-homed · private leg"| PRIVATE_SUBNET
+
+    %% Negative control: there is NO direct path into the private subnet.
+    CLIENT -.->|"❌ unreachable (no host ports,<br/>internal network)"| PRIVATE_SUBNET
+
+    %% --------------------------------------------------------------------
+    %% Styling
+    %% --------------------------------------------------------------------
+    classDef nodeApp fill:#d4edda,stroke:#28a745,stroke-width:2px,color:#000000
+    classDef pyApp fill:#fff3cd,stroke:#b8860b,stroke-width:2px,color:#000000
+    classDef lbNode fill:#ffd6a5,stroke:#d9480f,stroke-width:2px,color:#000000
+    classDef dead fill:#ffe3e3,stroke:#c92a2a,color:#c92a2a
+
+    class B1,B2 nodeApp
+    class P1,P2 pyApp
+    class LB lbNode
+
+    style PUBLIC_SUBNET fill:#e7f5ff,stroke:#1971c2,stroke-width:2px
+    style PRIVATE_SUBNET fill:#fff0f6,stroke:#c92a2a,stroke-width:2px,stroke-dasharray:6 5

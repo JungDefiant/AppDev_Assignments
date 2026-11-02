@@ -1,0 +1,6 @@
+{
+    // Force VS Code (Python + Jupyter extensions) to use this project's uv-managed venv
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
+    "python.terminal.activateEnvironment": true,
+    "jupyter.interactiveWindow.creationMode": "perFile"
+}

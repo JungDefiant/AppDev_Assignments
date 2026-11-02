@@ -1,0 +1,15 @@
+# Terraform working directories / state
+.terraform/
+.terraform.tfstate.lock.info
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+
+# Keep the provider lock file (.terraform.lock.hcl) in version control,
+# but ignore local override files.
+*.tfvars.local
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
