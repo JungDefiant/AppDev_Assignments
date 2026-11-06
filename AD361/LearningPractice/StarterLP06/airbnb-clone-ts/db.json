@@ -1,0 +1,74 @@
+{
+  "rentals": [
+    {
+      "name": "Cozy Cabin",
+      "price": 120,
+      "location": "Seattle, WA",
+      "img": "https://images.unsplash.com/photo-1575403071235-5dcd06cbf169?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "description": "A peaceful getaway nestled in the evergreens, perfect for rainy day reading and hot cocoa by the fireplace."
+    },
+    {
+      "name": "Beachfront Condo",
+      "price": 200,
+      "location": "Miami, FL",
+      "img": "https://images.unsplash.com/photo-1561799461-445437ea576b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "description": "Wake up to ocean views and step straight onto the sand. Ideal for sun-seekers and beach lovers."
+    },
+    {
+      "name": "Luxury Villa",
+      "price": 450,
+      "location": "Los Angeles, CA",
+      "img": "https://plus.unsplash.com/premium_photo-1682377521753-58d1fd9fa5ce?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "description": "Modern elegance meets comfort in this high-end villa, complete with a private pool and sweeping city views."
+    },
+    {
+      "name": "Mountain Retreat",
+      "price": 180,
+      "location": "Denver, CO",
+      "img": "https://plus.unsplash.com/premium_photo-1668351277191-9df852eb657f?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "description": "Escape to the Rockies in this cozy retreat, surrounded by nature trails and scenic mountain views."
+    },
+    {
+      "name": "Downtown Loft",
+      "price": 250,
+      "location": "New York, NY",
+      "img": "https://images.unsplash.com/photo-1546017959-787be59bdcbb?q=80&w=1848&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "description": "Stay in the heart of the city that never sleeps with this stylish loft just steps away from iconic landmarks."
+    },
+    {
+      "name": "Desert Oasis",
+      "price": 300,
+      "location": "Phoenix, AZ",
+      "img": "https://images.unsplash.com/photo-1527736848781-72dc3b2ee00f?q=80&w=2017&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "description": "A modern hideaway tucked in the desert, with vibrant sunsets, cacti gardens, and starry night skies."
+    },
+    {
+      "name": "Lakeside Cottage",
+      "price": 170,
+      "location": "Lake Tahoe, CA",
+      "img": "https://images.unsplash.com/photo-1542894012-9737b8b72f8c?q=80&w=1949&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "description": "Unwind by the lake with serene water views, cozy interiors, and the perfect dock for morning coffee."
+    },
+    {
+      "name": "Ski Chalet",
+      "price": 400,
+      "location": "Aspen, CO",
+      "img": "https://images.unsplash.com/photo-1550503736-c1a2c9033c03?q=80&w=2081&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "description": "Hit the slopes by day and relax fireside by night in this upscale chalet in the heart of ski country."
+    },
+    {
+      "name": "Historic Brownstone",
+      "price": 320,
+      "location": "Boston, MA",
+      "img": "https://images.unsplash.com/photo-1542042238232-3a0b14425b71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "description": "Classic charm meets modern comfort in this beautifully preserved brownstone in a walkable historic district."
+    },
+    {
+      "name": "Tropical Bungalow",
+      "price": 220,
+      "location": "Honolulu, HI",
+      "img": "https://images.unsplash.com/photo-1520483601560-389dff434fdf?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "description": "Soak up island vibes in this breezy bungalow, just minutes from the beach and surrounded by lush palms."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "oci-container-demo",
+  "version": "1.0.0",
+  "description": "Lightweight zero-dependency Node.js web app for the AD371 OCI Container assignment",
+  "main": "server.js",
+  "type": "commonjs",
+  "private": true,
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  }
+}

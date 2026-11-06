@@ -1,0 +1,78 @@
+# Docker Compose orchestration (Option A)
+#
+#   web      - 3 replicas of the containerized app (built from ./Dockerfile),
+#              CPU/memory limits + reservations, health checks, restart policy.
+#   gateway  - nginx reverse proxy publishing a single host port; Docker's
+#              embedded DNS round-robins the `web` service name across replicas.
+#
+# Usage:
+#   docker compose up --build -d
+#   docker compose ps
+#   curl http://localhost:8080/metadata        # different containerId per hit
+#   docker compose down
+
+name: oci-container
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ad371/oci-web:1.0.0
+    env_file: .env
+    environment:
+      PORT: "8080"
+      HOST: 0.0.0.0
+    # Container-to-container only; the gateway owns the published host port so
+    # multiple replicas can run without port collisions.
+    expose:
+      - "8080"
+    deploy:
+      mode: replicated
+      replicas: 3
+      resources:
+        limits:
+          cpus: "0.50"        # max 50% of one core per replica
+          memory: 128M        # hard limit - container is OOM-killed above this
+        reservations:
+          cpus: "0.10"        # guaranteed CPU slice (scheduling hint)
+          memory: 64M         # guaranteed memory floor
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+    # NOTE: Compose v2 translates `deploy.restart_policy` into the actual
+    # container restart policy (verify: docker inspect <ctr> --format
+    # '{{.HostConfig.RestartPolicy.Name}}') and it takes precedence over a
+    # top-level `restart:` key, so only one is specified here.
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/healthz"]
+      interval: 15s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    networks:
+      - frontend
+
+  gateway:
+    image: nginx:1.27-alpine
+    ports:
+      - "${GATEWAY_PORT:-8080}:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      web:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/healthz"]
+      interval: 15s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    networks:
+      - frontend
+
+networks:
+  frontend:
+    driver: bridge

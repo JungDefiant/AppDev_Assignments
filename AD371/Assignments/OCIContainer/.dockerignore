@@ -1,0 +1,19 @@
+# Never send these to the Docker daemon - faster, safer, more reproducible builds
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+.dockerignore
+Dockerfile
+docker-compose.yml
+docker-compose.*.yml
+README.md
+nginx/
+k8s/
+node_modules
+npm-debug.log*
+*.log
+.vscode
+.idea
+.DS_Store
